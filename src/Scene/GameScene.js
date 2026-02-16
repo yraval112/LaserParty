@@ -70,9 +70,9 @@ export default class GameScene extends Phaser.Scene {
   updateUI() {
     this.infoText.setText(
       `State: ${this.engine.state}
-Rounds: ${this.engine.survivedRounds}
-Multiplier: ${this.engine.getMultiplier().toFixed(2)}x
-Winnings: $${this.engine.getWinnings().toFixed(2)}`
+        Rounds: ${this.engine.survivedRounds}
+        Multiplier: ${this.engine.getMultiplier().toFixed(2)}x
+        Winnings: $${this.engine.getWinnings().toFixed(2)}`
     )
   }
 }

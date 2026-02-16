@@ -6,12 +6,13 @@ export default class SoundManager {
   }
   static preload(scene) {
     scene.load.audio('laser', 'assets/sounds/LaserShoot.mp3')
-    //scene.load.audio('win', 'assets/sounds/WinSound.mp3')
+    scene.load.audio('win', 'assets/sounds/Win.mp3')
     scene.load.audio('lose', 'assets/sounds/GameOver.mp3')
    
   }
    create() {
     this.sounds.laser = this.scene.sound.add('laser')
+    this.sounds.win = this.scene.sound.add('win')
     this.sounds.lose = this.scene.sound.add('lose')
    }
    playSFX(key, config = {}) {

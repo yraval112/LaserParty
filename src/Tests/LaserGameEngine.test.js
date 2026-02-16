@@ -40,9 +40,20 @@ describe("LaserGameEngine", () => {
     game.start()
     game.select(0, 0)
 
-    game.resolveLaser(true, 1) // survive
+    game.resolveLaser(true, 1) 
 
     expect(game.getMultiplier()).toBeGreaterThan(1)
+  })
+
+  it("calculates winnings correctly", () => {
+    const game = new LaserGameEngine(3, 50) 
+    game.start()
+    game.select(0, 0)
+    
+    const winnings = game.getWinnings()
+    const multiplier = game.getMultiplier()
+    
+    expect(winnings).toBe(50 * multiplier)
   })
 
 })

@@ -58,6 +58,11 @@ export default class LaserGameEngine {
   resolveLaser(isRow, index) {
     if (!this.selected) return { result: "INVALID" }
 
+    if (this.grid.isOneByOne()) {
+      this.state = "ENDED"
+      return { result: "WIN" }
+    }
+
     const hit =
       (isRow && this.selected.row === index) ||
       (!isRow && this.selected.col === index)

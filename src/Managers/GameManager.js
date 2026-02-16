@@ -39,7 +39,6 @@ preload() {
     
     this.soundManager = new SoundManager(this)
     this.soundManager.create()
-    // Initialize UI Manager
     this.ui = new UIManager(this)
     this.ui.createAll(
       this.betAmount,
@@ -450,6 +449,7 @@ preload() {
     this.ui.hideCashOut()
 
     if (won) {
+      this.soundManager.playSFX('win')
       const winnings = (this.betAmount * this.currentMultiplier).toFixed(2)
       this.ui.showWinMessage(winnings, this.currentMultiplier.toFixed(2), this.survivedRounds)
     } else {
