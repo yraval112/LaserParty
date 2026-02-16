@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import UIManager from './UIManager.js'
+import SoundManager from '../Core/SoundManager.js'
 
 export default class GameManager extends Phaser.Scene {
   constructor() {
@@ -23,7 +24,9 @@ export default class GameManager extends Phaser.Scene {
 
     this.ui = null
   }
-
+preload() {
+    SoundManager.preload(this)
+  }
   create() {
     this.gameWidth = this.cameras.main.width
     this.gameHeight = this.cameras.main.height
@@ -34,6 +37,8 @@ export default class GameManager extends Phaser.Scene {
     this.selectedPosition = null
     this.currentLaser = null
     
+    this.soundManager = new SoundManager(this)
+    this.soundManager.create()
     // Initialize UI Manager
     this.ui = new UIManager(this)
     this.ui.createAll(
@@ -312,7 +317,9 @@ export default class GameManager extends Phaser.Scene {
 
   fireLaser() {
     const { isRow, index } = this.currentLaser
-
+     this.soundManager.playSFX('laser', {
+      rate: Phaser.Math.FloatBetween(0.95, 1.05)
+    })
     this.cameras.main.flash(200, 255, 0, 0)
     this.cameras.main.shake(200, 0.01)
 
@@ -446,6 +453,7 @@ export default class GameManager extends Phaser.Scene {
       const winnings = (this.betAmount * this.currentMultiplier).toFixed(2)
       this.ui.showWinMessage(winnings, this.currentMultiplier.toFixed(2), this.survivedRounds)
     } else {
+      this.soundManager.playSFX('lose')
       this.ui.showLoseMessage(this.betAmount, this.survivedRounds, this.currentMultiplier.toFixed(2))
     }
     
